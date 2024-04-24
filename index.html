@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="data-container">
+    
+    </div>
+
+
+    <img id="myid" src="https://www.w3schools.com/js/pic_bulboff.gif" alt="">
+    <p id="text"></p>
+    <button onclick="turnOn()">on</button>
+    <button onclick="turnOf()">off</button>
+    <p id="demo"></p>
+    <button onclick="document.getElementById('demo').innerHTML = Date()">The time is?</button>
+    <script>
+      function turnOf(){
+        document.getElementById('myid').src='https://www.w3schools.com/js/pic_bulboff.gif';
+        document.getElementById("text").innerHTML = "im off";
+      }
+        function turnOn(){
+            document.getElementById('myid').src='https://www.w3schools.com/js/pic_bulbon.gif'
+            document.getElementById("text").innerHTML = "im on";
+        }
+
+        let randNumber = [5, 13, 8, 1]
+        randNumber.sort()
+        console.log(randNumber)
+    </script>
+</body>
+</html>

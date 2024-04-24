@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="content"></div>
+    <input id="interest" type="checkbox" name="interest" value="study"> study
+    <input id="interest" type="checkbox" name="interest" value="sport" > sport
+    <input id="interest" type="checkbox" name="interest" value="movie"> movie
+    <input id="interest" type="checkbox" name="interest" value="music"> music
+
+    <button onclick="submited()">submit</button>
+    <script>
+        function submited(){
+
+            let inputsDOM = document.querySelectorAll('input[name=interest]');
+            let contentDOM = document.getElementById('content')
+            let content = "<ul>";
+            
+            for (let i = 0 ;i <inputsDOM.length; i++){
+                if(inputsDOM[i].checked){
+                    content += "<li>" + inputsDOM[i].value + "</l>";
+                }
+            }
+
+
+            content += "</ul>";
+            contentDOM.innerHTML = content;
+        }
+    </script>
+</body>
+</html>

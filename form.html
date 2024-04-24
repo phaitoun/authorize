@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document 2</title>
+  <style>
+    /* สิ่งที่อยู่ตรงนี้ จะมีไว้แค่ให้ dev อ่าน */
+    /* 1. แต่งใคร ? (id, class, DOM) 2. แต่งอะไร ? */
+    @font-face {
+      font-family: 'kanit';
+      src: url('./Kanit/Kanit-Regular.ttf');
+    }
+
+    body {
+      font-family: 'kanit';
+    }
+
+    .container {
+      width: 100%;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: azure;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .header {
+      font-size: 30px;
+      text-align: center;
+    }
+
+    .header-form {
+      width: 140px;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .form-input {
+      margin-bottom: 10px;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    input.form, textarea {
+      border: 1px gainsboro solid;
+      width: 100%;
+    }
+
+    .button {
+      border: 0;
+      width: 50%;
+      height: 40px;
+      background-color: #2962FF;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- 3. form -->
+    <div class="header form-input">
+      Register form
+    </div>
+    <div class="flex form-input">
+      <div class="header-form">name</div>
+      <input class="form" name="firstname" type="text">
+    </div>
+    <div class="flex form-input">
+      <div class="header-form">lastname </div>
+      <input class="form" name="lastname" type="text">
+    </div>
+    <div class="flex form-input">
+      <div class="header-form">age</div>
+      <input class="form" name="age" type="number" min="0" max="100">
+    </div>
+    <div class="flex gender form-input">
+      <div class="header-form">gender</div>
+      <div class="flex">
+        <div>
+          <input name="gender" type="radio" value="male"> male
+        </div>
+        <div>
+          <input name="gender" type="radio" value="female"> female
+        </div>
+        <div>
+          <input name="gender" type="radio" value="other"> other
+        </div>
+      </div>
+    </div>
+    <div class="form-input">
+      interest
+      <div>
+        <input name="interest" type="checkbox" value="sport"> sport
+      </div>
+      <div>
+        <input name="interest" type="checkbox" value="movie"> movie
+      </div>
+      <div>
+        <input name="interest" type="checkbox" value="cooking"> cooking
+      </div>
+    </div>
+    <div class="form-input">
+      description
+      <div>
+        <textarea name="description"></textarea>
+      </div>
+    </div>
+
+    <div class="center">
+      <button onclick="submitData()" class="button">submit</button>
+    </div>
+  </div>
+  <script src="index.js"></script>
+</body>
+</html>

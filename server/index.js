@@ -39,8 +39,7 @@ app.post('/user/register', async (req,res)=>{
     try{
         const result = await conn.query("INSERT INTO users SET ?", userData);
         res.json({
-            message : "insert ok",
-            result
+            message : "insert ok"
         })
     }
     catch(err){
@@ -55,7 +54,7 @@ app.post('/user/register', async (req,res)=>{
 });
 app.post("/api/login", async (req, res) => {
     const { email, password } = req.body;
-  
+
     const [result] = await conn.query("SELECT * from users WHERE email = ?", email);
     const user = result[0];
     console.log(result[0])
@@ -65,23 +64,39 @@ app.post("/api/login", async (req, res) => {
       }
     
       //create toekn
-      const token = jwt.sign({ email, role: "admin" }, secret, { expiresIn: "1h" });
-    
-      res.send({ message: "Login successful", token });
+      const token = jwt.sign({ email, role: "admin" }, secret, { expiresIn: "1h" });   
+     // res.send({ message: "Login successful", token });
+     // way 2 backend set token in cookie
+     //-------------this code will set token in cookie web browser-------------------
+     res.cookie('token',token , {
+        maxAge: 300000,
+        secure: true,
+        httpOnly: true,
+        sameSite: "none"
+     });
   });
 
 app.get('/users', async (req,res)=>{
 
 
     try{
-        const authHeader = req.headers["authorization"];
-        console.log(authHeader)
+        //way 1 when request api send token with header to request access
+       // const authHeader = req.headers["authorization"];
         
-        let authToken = ''
-        if(authHeader){
-            authToken = authHeader.split(' ')[1]
-        }
-        
+        // let authToken = ''
+        // if(authHeader){
+        //     authToken = authHeader.split(' ')[1]
+        // }
+
+
+
+
+
+
+        // ------------way 2 when request api ja pai aw cookie nai broser ma check 
+
+        const authToken = req.cookies.token
+
         const user = jwt.verify(authToken , secret)
         // console.log("auth token", authToken)
         // console.log(user.email);

@@ -9,7 +9,10 @@ const bcrypt = require("bcrypt");
 const app = express();
 app.use(express.json());
 
-app.use(cors())
+app.use(cors({
+    credentials: true,
+    origin: true,
+}))
 
 app.use(cookieParser());
 const port = 8000;
@@ -57,7 +60,7 @@ app.post("/api/login", async (req, res) => {
 
     const [result] = await conn.query("SELECT * from users WHERE email = ?", email);
     const user = result[0];
-    console.log(result[0])
+    console.log(user.password)
     const match = bcrypt.compare(password, user.password);
     if (!match) {
         return res.status(400).send({ message: "Invalid email or password" });
@@ -68,12 +71,17 @@ app.post("/api/login", async (req, res) => {
      // res.send({ message: "Login successful", token });
      // way 2 backend set token in cookie
      //-------------this code will set token in cookie web browser-------------------
+     console.log(token)
      res.cookie('token',token , {
         maxAge: 300000,
         secure: true,
         httpOnly: true,
         sameSite: "none"
      });
+     res.json({
+        message : "login success",
+     
+     })
   });
 
 app.get('/users', async (req,res)=>{
@@ -81,22 +89,17 @@ app.get('/users', async (req,res)=>{
 
     try{
         //way 1 when request api send token with header to request access
-       // const authHeader = req.headers["authorization"];
+        // const authHeader = req.headers["authorization"];
         
         // let authToken = ''
         // if(authHeader){
         //     authToken = authHeader.split(' ')[1]
         // }
 
-
-
-
-
-
         // ------------way 2 when request api ja pai aw cookie nai broser ma check 
 
         const authToken = req.cookies.token
-
+        console.log("cookie : ", authToken)
         const user = jwt.verify(authToken , secret)
         // console.log("auth token", authToken)
         // console.log(user.email);
